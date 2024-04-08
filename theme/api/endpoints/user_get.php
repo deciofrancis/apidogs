@@ -20,13 +20,13 @@ function api_user_get($request) {
     return rest_ensure_response($response);
 }
 
-function register_api_user_post() {
+function register_api_user_get() {
     register_rest_route('api', '/user', [
-        'methods' => WP_REST_Server::CREATABLE,
-        'callback' => 'api_user_post',
+        'methods' => WP_REST_Server::READABLE,
+        'callback' => 'api_user_get',
     ]);
 }
 
-add_action('rest_api_init', 'register_api_user_post');
+add_action('rest_api_init', 'register_api_user_get');
 
 ?>
