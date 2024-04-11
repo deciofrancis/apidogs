@@ -1,12 +1,13 @@
 <?php 
 
 function api_photo_delete($request) {
+    $post_id = $request['id'];
     $user = wp_get_current_user();
     $post = get_post($post_id);
     $author_id = (int) $post->post_author;
-    $user_id = (int) $iser->ID;
+    $user_id = (int) $user->ID;
 
-    if($user_id !== $author_id || !isset($post)) {
+    if ($user_id !== $author_id || !isset($post)) {
         $response = new WP_Error('error', 'Sem permissao.', ['status' => 401]);
         return rest_ensure_response($response);
     }
@@ -24,7 +25,6 @@ function register_api_photo_delete() {
         'callback' => 'api_photo_delete',
     ]);
 }
-
 add_action('rest_api_init', 'register_api_photo_delete');
 
 ?>
